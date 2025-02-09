@@ -2,6 +2,9 @@
 
 [English](#english) | [中文](#中文)
 
+### 🔗 Quick Install | 快速安装
+**[Click here for easy installation page | 点击此处访问便捷安装页面](https://wanglrebe.github.io/Documents/Jupyter_Timeout_Controller_Installation.html)**
+
 ## English
 
 ### Introduction
