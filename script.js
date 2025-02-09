@@ -58,7 +58,7 @@ const T = TRANSLATIONS[LANG];
 
 
 
-// 创建并插入样式
+// 修改样式部分
 const style = document.createElement('style');
 style.textContent = `
 .timeout-control {
@@ -97,7 +97,7 @@ style.textContent = `
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     z-index: 10001;
-    min-width: 300px;
+    width: 320px; /* 固定面板宽度 */
     display: none;
 }
 
@@ -139,18 +139,34 @@ style.textContent = `
 
 .config-item {
     margin: 8px 0;
+    padding: 0 2px; /* 添加小边距 */
 }
 
 .config-item label {
     display: block;
     margin-bottom: 4px;
+    font-size: 13px;
+    color: #666;
 }
 
 .config-item input {
     width: 100%;
-    padding: 4px 8px;
+    padding: 6px 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 13px;
+    box-sizing: border-box; /* 确保padding不会增加总宽度 */
+}
+
+.config-item input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.status-info div {
+    margin: 4px 0;
+    font-size: 13px;
 }
 
 .overlay {
