@@ -1,5 +1,8 @@
 # Jupyter Lab Timeout Controller | Jupyter Lab 超时控制器
 
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/wanglrebe/Jupyter-alive)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 [English](#english) | [中文](#中文)
 
 ### 🔗 Quick Install | 快速安装
@@ -9,6 +12,32 @@
 
 ### Introduction
 A browser-based tool for automatically managing Jupyter Lab session timeouts. This tool helps prevent session disconnections by intelligently resetting the timeout counter before it expires.
+
+### Compatibility & Use Cases
+This tool is specifically designed for:
+- Jupyter Lab instances running in containerized environments, particularly those deployed via OKD (OpenShift Kubernetes Distribution)
+- Environments where a timeout counter is visible in the top-right corner of the Jupyter Lab interface
+- Systems that use the standard Jupyter timeout mechanism
+
+You can determine if this tool is suitable for your environment by:
+1. Looking for a timeout indicator in the top-right corner of your Jupyter Lab interface (e.g., "Timeout: 2/10")
+2. Checking if clicking this indicator resets the timer
+3. Using browser developer tools to verify timeout data is structured like:
+```json
+{
+  "inactive_min": 2,
+  "timeout_min": 10,
+  "remaining_min": 8,
+  "warn": false
+}
+```
+
+### How It Works
+The tool identifies the timeout counter in the Jupyter Lab interface and periodically simulates clicks on it to reset the inactivity timer. It uses intelligent timing algorithms to:
+1. Detect the configured timeout duration
+2. Calculate optimal reset intervals
+3. Monitor remaining time and perform emergency resets when needed
+4. Simulate natural user activity with randomized timing
 
 ### Features
 - Automatic timeout detection and management
@@ -41,6 +70,26 @@ A browser-based tool for automatically managing Jupyter Lab session timeouts. Th
 - Maximum Interval: Longest time between resets (10-50% of timeout)
 - Auto Reset Threshold: Trigger emergency reset when remaining time is below this percentage
 
+### Project Structure
+- `timeout-controller.js` - Main source code with full comments
+- `timeout-controller.min.js` - Minified version for production use
+- `minify_script.py` - Python script for generating the minified version
+
+### Troubleshooting
+If you encounter issues:
+- Make sure your Jupyter Lab instance has a visible timeout counter
+- Check if the environment matches the compatibility requirements
+- Try refreshing the page and reapplying the script
+- Check browser console for any error messages
+
+### Contributing
+Contributions are welcome! To contribute:
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 ### Notes
 - The script automatically detects your browser's language settings
 - All timeouts are handled locally in the browser
@@ -53,6 +102,32 @@ A browser-based tool for automatically managing Jupyter Lab session timeouts. Th
 
 ### 简介
 一个基于浏览器的 Jupyter Lab 会话超时管理工具。通过智能重置超时计数器来防止会话断开连接。
+
+### 兼容性和适用场景
+该工具专为以下环境设计：
+- 在容器化环境中运行的 Jupyter Lab 实例，特别是通过 OKD（OpenShift Kubernetes Distribution）部署的实例
+- Jupyter Lab 界面右上角有超时计数器的环境
+- 使用标准 Jupyter 超时机制的系统
+
+您可以通过以下方式确定此工具是否适合您的环境：
+1. 查看 Jupyter Lab 界面右上角是否有超时指示器（例如："Timeout: 2/10"）
+2. 确认点击此指示器是否可以重置计时器
+3. 使用浏览器开发者工具验证超时数据的结构是否类似于：
+```json
+{
+  "inactive_min": 2,
+  "timeout_min": 10,
+  "remaining_min": 8,
+  "warn": false
+}
+```
+
+### 工作原理
+该工具识别 Jupyter Lab 界面中的超时计数器，并定期模拟点击以重置不活动计时器。它使用智能计时算法：
+1. 检测配置的超时时长
+2. 计算最佳重置间隔
+3. 监控剩余时间并在需要时执行紧急重置
+4. 使用随机计时模拟自然用户活动
 
 ### 功能特点
 - 自动检测和管理超时
@@ -84,6 +159,26 @@ A browser-based tool for automatically managing Jupyter Lab session timeouts. Th
 - 最小间隔：两次重置之间的最短时间（超时时间的5-30%）
 - 最大间隔：两次重置之间的最长时间（超时时间的10-50%）
 - 自动重置阈值：剩余时间低于此百分比时触发紧急重置
+
+### 项目结构
+- `timeout-controller.js` - 带完整注释的主源代码
+- `timeout-controller.min.js` - 用于生产环境的压缩版本
+- `minify_script.py` - 用于生成压缩版本的Python脚本
+
+### 故障排除
+如果您遇到问题：
+- 确保您的 Jupyter Lab 实例有可见的超时计数器
+- 检查环境是否符合兼容性要求
+- 尝试刷新页面并重新应用脚本
+- 检查浏览器控制台是否有错误消息
+
+### 参与贡献
+欢迎贡献！要参与贡献：
+1. Fork 存储库
+2. 创建您的特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交您的更改 (`git commit -m '添加一些很棒的特性'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 打开一个 Pull Request
 
 ### 注意事项
 - 脚本会自动检测浏览器语言设置
